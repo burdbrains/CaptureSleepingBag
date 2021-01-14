@@ -26,7 +26,7 @@ public class MapCommand implements CommandExecutor {
 	//																														//
 	// Commands (sbm stands for Sleeping Bag Map):																			//
 	//																														//
-	// * /sbm create <worldname> <max teams> <Map Name> | creates a worldname.yml file that									//
+	// * /sbm create <max teams> <Map Name> | creates a worldname.yml file that									//
 	//								 		   			  will be written to with other commands 							//
 	//								 		   			  (also teleports the player to the given world)					//
 	//																														//
@@ -85,7 +85,7 @@ public class MapCommand implements CommandExecutor {
 			if (args[0].equals("create")) 
 			{
 				// check if executor is within bounds of command arguments
-				if (args.length >= 4)
+				if (args.length >= 3)
 				{
 					// run MapWriter creation and putting into HashMap logic
 				}

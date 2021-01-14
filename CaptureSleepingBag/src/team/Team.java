@@ -8,7 +8,7 @@ import sleepingbag.BagStatus;
 
 public class Team {
 	
-	private TeamData teamData;
+	private int teamCount;
 	
 	private ArrayList<Player> teamMembers;
 	
@@ -19,6 +19,7 @@ public class Team {
 	//
 	private BagStatus bagStatus;
 	
+	private TeamData teamData;
 	private TeamMapData mapData;
 	
 	

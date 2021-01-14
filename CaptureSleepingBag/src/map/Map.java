@@ -7,6 +7,7 @@ import org.bukkit.World;
 import mapobjs.Generator;
 import mapobjs.Shopkeeper;
 import team.Team;
+import team.TeamMapData;
 
 public class Map {
 	
@@ -19,15 +20,26 @@ public class Map {
 	// will also use this for writing to a map with MapWriter			 //
 	///////////////////////////////////////////////////////////////////////
 	
-	private boolean writingMap;
+	// private boolean writingMap;
 	
-	private World world;
+	private String mapName;
+	
+	private World mapWorld;
 	
 	private int teamCount;
-	private ArrayList<Team> teams;
+	private ArrayList<TeamMapData> teamsData;
 	
 	private ArrayList<Generator> generators;
 	
 	private ArrayList<Shopkeeper> shopkeepers;
+	
+	public Map(World world, int maxTeams, String name) 
+	{
+		this.mapWorld = world;
+		
+		this.teamCount = maxTeams;
+		
+		this.mapName = name;
+	}
 
 }
