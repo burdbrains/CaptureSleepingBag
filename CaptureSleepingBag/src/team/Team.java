@@ -8,6 +8,12 @@ import sleepingbag.BagStatus;
 
 public class Team {
 	
+	//////////////////////////////////////////
+	// Team object used for a game instance //
+	// responsible for handling all things	//
+	// related to teams						//
+	//////////////////////////////////////////
+	
 	private int teamCount;
 	
 	private ArrayList<Player> teamMembers;

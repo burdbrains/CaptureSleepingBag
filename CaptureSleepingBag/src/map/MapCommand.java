@@ -1,5 +1,6 @@
 package map;
 
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -61,6 +62,19 @@ public class MapCommand implements CommandExecutor {
 		this.main = main;
 	}
 	
+	private boolean testInt(String str) 
+	{
+		try 
+		{
+			Integer.parseInt(str);
+			return true;
+		}
+		catch (NumberFormatException e) 
+		{
+			return false;
+		}
+	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
@@ -80,6 +94,7 @@ public class MapCommand implements CommandExecutor {
 		{
 			// cast the player
 			Player player = (Player) sender;
+			World world = player.getWorld();
 			
 			// check if the command is creating the map
 			if (args[0].equals("create")) 
@@ -87,11 +102,21 @@ public class MapCommand implements CommandExecutor {
 				// check if executor is within bounds of command arguments
 				if (args.length >= 3)
 				{
-					// run MapWriter creation and putting into HashMap logic
+					// check whether args[1] valid int and that it isnt bigger than 8 or smaller than 2
+					if (testInt(args[1]) && (Integer.parseInt(args[1]) >= 2 && Integer.parseInt(args[1]) <= 8))
+					{
+						// uses map writer to add newly established map (with command)
+						// to creatingMap HashMap
+						MapWriter.createMap(this.main, args, player, world);
+					}
+					else 
+					{
+						player.sendMessage(ChatColor.RED + "Please provide a valid integer for 'max teams' argument: /sbm create <max teams> <Map Name>");
+					}
 				}
 				else 
 				{
-					player.sendMessage(ChatColor.RED + "Incorrect arguments: /sbm create <worldname> <max teams> <Map Name>");
+					player.sendMessage(ChatColor.RED + "Incorrect arguments: /sbm create <max teams> <Map Name>");
 				}
 			}
 			// or if the command is setting something in the map

@@ -1,5 +1,10 @@
 package map;
 
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+
+import com.burdbrains.capturesleepingbag.Main;
+
 public class MapWriter {
 	
 	////////////////////// MapWriter class //////////////////////
@@ -8,5 +13,36 @@ public class MapWriter {
 	// (basically there will be a method(s) for each command   //
 	// used to create a map in this class)					   //
 	/////////////////////////////////////////////////////////////
+	
+	public static void createMap(Main main, String[] args, Player player, World world) 
+	{
+		// define maxTeams integer;
+		int maxTeams = Integer.parseInt(args[1]);
+		
+		// parse team name args
+		String mapName = "";
+		
+		for (int i = 2; i < args.length; i++)
+		{
+			mapName += args[i] + " ";
+		}
+		
+		mapName = mapName.substring(0, mapName.length()-1);
+		
+		// establish map object and add to creatingMap class
+		Map map = new Map(world, maxTeams, mapName);
+		
+		// creating the TeamMapData ArrayList to be edited
+		map.establishMapData();
+		
+		// add to main hashMap
+		main.addCreatingMap(player, map);
+	}
+	
+	public static void finalizeMap(Main main, Map map) 
+	{
+		// finalize map into map.yml
+		
+	}
 	
 }
