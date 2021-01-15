@@ -1,0 +1,6 @@
+version: 0.1.0
+api-version: 1.16
+name: CaptureSleepingBag
+main: com.burdbrains.capturesleepingbag.Main
+author: burdbrains
+description: Capture the Flag X Bed Wars mini-game.

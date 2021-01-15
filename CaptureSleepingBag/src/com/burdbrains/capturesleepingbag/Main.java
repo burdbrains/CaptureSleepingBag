@@ -24,7 +24,7 @@ public class Main extends JavaPlugin {
 	// ATTRIBUTES //
 	private HashMap<Player, Map> creatingMap = new HashMap<>();
 	
-	// GETTER(S) //
+	// TOOLS //
 	public boolean playerCreatingMap(Player player) 
 	{
 		if (this.creatingMap.get(player) != null) 

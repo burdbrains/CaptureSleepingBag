@@ -30,19 +30,20 @@ public class MapWriter {
 		mapName = mapName.substring(0, mapName.length()-1);
 		
 		// establish map object and add to creatingMap class
-		Map map = new Map(world, maxTeams, mapName);
-		
-		// creating the TeamMapData ArrayList to be edited
-		map.establishMapData();
+		Map map = new Map(main, world, maxTeams, mapName);
 		
 		// add to main hashMap
 		main.addCreatingMap(player, map);
 	}
 	
+	// writes the map to a .yml file
 	public static void finalizeMap(Main main, Map map) 
 	{
 		// finalize map into map.yml
 		
 	}
+	
+	
+	// Write Location (Take Location Object and convert to list of 3 coordinates)
 	
 }

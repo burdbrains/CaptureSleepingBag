@@ -1,0 +1,13 @@
+Gen Tiers:
+  One: 
+    - IRON_INGOT
+    - WHITE
+    - Iron
+  Two:
+    - GOLD_INGOT
+    - GOLD
+    - Gold
+  Three:
+    - NETHERITE_INGOT
+    - DARK_GRAY
+    - Netherite

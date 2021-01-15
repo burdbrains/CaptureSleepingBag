@@ -6,15 +6,17 @@ public class Shopkeeper {
 	
 	private Location shopLocation;
 	
-	private boolean itemShop;
+	// 0 is team shop
+	// 1 is item shop
+	private int itemShop;
 	
 	public Shopkeeper() 
 	{
 		this.shopLocation = null;
-		this.itemShop = false;
+		this.itemShop = 0;
 	}
 	
-	public Shopkeeper(Location loc, boolean itemShop) 
+	public Shopkeeper(Location loc, int itemShop) 
 	{
 		this.shopLocation = loc;
 		this.itemShop = itemShop;
@@ -27,7 +29,7 @@ public class Shopkeeper {
 		this.shopLocation = loc;
 	}
 	
-	public void setItemShop(boolean itemShop) 
+	public void setItemShop(int itemShop) 
 	{
 		this.itemShop = itemShop;
 	}
@@ -38,7 +40,7 @@ public class Shopkeeper {
 		return this.shopLocation;
 	}
 	
-	public boolean isItemShop() 
+	public int isItemShop() 
 	{
 		return this.itemShop;
 	}
