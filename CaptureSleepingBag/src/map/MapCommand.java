@@ -324,6 +324,7 @@ public class MapCommand implements CommandExecutor {
 						{
 							// map finalization logic
 							// function from MapWriter
+							MapWriter.finalizeMap(this.main, map, player);
 						}
 					}
 				}

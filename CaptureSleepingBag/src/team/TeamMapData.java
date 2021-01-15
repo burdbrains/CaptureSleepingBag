@@ -3,10 +3,10 @@ package team;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 import map.Map;
-import net.md_5.bungee.api.ChatColor;
 
 public class TeamMapData {
 	
@@ -22,6 +22,8 @@ public class TeamMapData {
 	
 	private TeamData teamData;
 	
+	private boolean isFinished;
+	
 	
 	// CONSTRUCTOR(S) //
 	public TeamMapData(TeamData data, int maxTeams) 
@@ -31,33 +33,64 @@ public class TeamMapData {
 		
 		this.capturedLocations = new HashMap<>();
 		
+		this.isFinished = false;
+		
 		this.initializeHash();
 	}
 	
 	// TOOLS //
 	
 	static volatile String retStr = "";
-	
+	// check if all the values in this instance are filled in
+	// if not add to the return String the things that are
+	// not finished
 	public String checkFinished() 
 	{	
 		retStr = "";
-		if (this.region1 != null && this.region2 != null && this.spawnLocation != null && this.bagLocation != null) 
+		
+		this.isFinished = true;
+		
+		this.capturedLocations.forEach((
+				(key, value) 
+				-> {
+					if (value == null) 
+					{
+						retStr += ChatColor.GRAY + "Captured location for " + key.getChatColor() + key.getTeamName() + ChatColor.GRAY + "bag\n";
+						this.isFinished = false;
+					}	
+				}
+				));
+		
+		if (this.region1 == null) 
 		{
-			this.capturedLocations.forEach((
-					(key, value) 
-					-> {
-						if (value == null) 
-						{
-							retStr += teamData.getChatColor() + teamData.getTeamName() + ChatColor.GRAY + " teams captured location for " + key.getChatColor() + key.getTeamName() + ChatColor.GRAY + "bag\n";
-						}	
-					}
-					));
+			retStr += ChatColor.GRAY + "Region corner 1";
+			this.isFinished = false;
+		}
+		if (this.region2 == null)
+		{
+			retStr += ChatColor.GRAY + "Region corner 2";
+			this.isFinished = false;
+		}
+		if (this.spawnLocation == null) 
+		{
+			retStr += ChatColor.GRAY + "Spawn location";
+			this.isFinished = false;
+		}
+		if (this.bagLocation == null) 
+		{
+			retStr += ChatColor.GRAY + "Bag location";
+			this.isFinished = false;
 		}
 		
 		return retStr;
 	}
 	
 	// GETTERS //
+	public boolean getIsFinished() 
+	{
+		return this.isFinished;
+	}
+	
 	public Location getRegion1() 
 	{
 		return this.region1;

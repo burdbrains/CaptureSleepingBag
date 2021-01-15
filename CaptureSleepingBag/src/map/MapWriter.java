@@ -37,13 +37,25 @@ public class MapWriter {
 	}
 	
 	// writes the map to a .yml file
-	public static void finalizeMap(Main main, Map map) 
+	public static void finalizeMap(Main main, Map map, Player player) 
 	{
 		// finalize map into map.yml
-		
+		// we need main to write a .yml file
+		String errorMsg = map.checkFinished();
+		if (!map.getIsFinished()) 
+		{
+			player.sendMessage(errorMsg);
+		}
+		else 
+		{
+			// writeConfig method here
+		}
 	}
 	
 	
-	// Write Location (Take Location Object and convert to list of 3 coordinates)
+	// writeConfig method
+	
+	
+	// formatLocation (Take Location Object and convert to list of 3 coordinates)
 	
 }

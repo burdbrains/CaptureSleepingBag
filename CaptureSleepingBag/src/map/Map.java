@@ -40,6 +40,8 @@ public class Map {
 	
 	private ArrayList<Shopkeeper> shopkeepers;
 	
+	private boolean isFinished;
+	
 	public Map(Main main, World world, int maxTeams, String name) 
 	{
 		this.main = main;
@@ -51,6 +53,8 @@ public class Map {
 		this.mapName = name;
 		
 		this.teamsMapData = new HashMap<>();
+		
+		this.isFinished = false;
 		
 		this.establishMapData();
 	}
@@ -76,9 +80,29 @@ public class Map {
 	// check if an integer value is a valid team in 
 	// the maps HashMap of teams
 	
+	
+	public static volatile String errorStr = "";
+	// check if all the values in this instance (specifically TeamMapData) are filled in
+	// if not add to the return String the things that are
+	// not finished
 	public String checkFinished() 
 	{
-		return "";
+		this.isFinished = true;
+		
+		errorStr = "";
+		this.teamsMapData.forEach((
+				(key, value)
+				-> 
+				{
+					if (!value.getIsFinished()) 
+					{
+						errorStr += value.checkFinished();
+						this.isFinished = false;
+					}
+				}
+				));
+		
+		return errorStr;
 	}
 	
 	public boolean validTeam(int teamVal) 
@@ -106,6 +130,11 @@ public class Map {
 	
 	
 	// GETTERS //
+	
+	public boolean getIsFinished() 
+	{
+		return this.isFinished;
+	}
 	
 	public World getMapWorld() 
 	{
