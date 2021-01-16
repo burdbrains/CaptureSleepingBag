@@ -1,0 +1,78 @@
+Name: Map Name
+# HashMap<String, HashMap<Integer, double[]>>
+Generators:
+  T1:
+    1:
+    - -124.5
+    - 67.0
+    - 301.5
+    2:
+    - 21.5
+    - 75.0
+    - -90.5
+  T2:
+    1:
+    - 16.5
+    - 26.0
+    - 237.5
+  T3:
+    1:
+    - -210.5
+    - 77.0
+    - -9.5
+    2:
+    - 2.5
+    - 7.0
+    - 903.5
+    3:
+    - 1029.5
+    - 36.0
+    - -964.5
+# HashMap<String, HashMap<Integer, double[]>>
+Shopkeepers:
+  ITEM:
+    1:
+    - -124.5
+    - 67.0
+    - 301.5
+    2:
+    - 21.5
+    - 75.0
+    - -90.5
+  TEAM:
+    1:
+    - 16.5
+    - 26.0
+    - 237.5
+    2:
+    - 2.5
+    - 7.0
+    - 903.5
+# HashMap<String, HashMap<String, double[]>>
+Teams:
+  RED:
+    Spawn:
+    - -124.5
+    - 67.0
+    - 301.5
+    Bag:
+    - 21.5
+    - 75.0
+    - -90.5
+    Blue (captured bag location):
+    - 16.5
+    - 26.0
+    - 237.5
+  BLUE:
+    Spawn:
+    - -210.5
+    - 77.0
+    - -9.5
+    Bag:
+    - 2.5
+    - 7.0
+    - 903.5
+    Red:
+    - 1029.5
+    - 36.0
+    - -964.5
