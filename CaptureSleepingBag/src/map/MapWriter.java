@@ -1,9 +1,15 @@
 package map;
 
+import java.util.HashMap;
+
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import com.burdbrains.capturesleepingbag.Main;
+
+import team.TeamData;
+import team.TeamMapData;
 
 public class MapWriter {
 	
@@ -49,6 +55,13 @@ public class MapWriter {
 		else 
 		{
 			// writeConfig method here
+			World world = map.getMapWorld();
+			String worldName = world.getName();
+			
+			String mapName = map.getMapName();
+			
+			HashMap<TeamData, TeamMapData> mapData = map.getDataHash();
+			
 		}
 	}
 	
@@ -57,5 +70,15 @@ public class MapWriter {
 	
 	
 	// formatLocation (Take Location Object and convert to list of 3 coordinates)
+	private double[] formatLocation(Location location) 
+	{
+		double x = location.getX();
+		double y = location.getY();
+		double z = location.getZ();
+		
+		double[] retArray = {x, y, z};
+		
+		return retArray;
+	}
 	
 }

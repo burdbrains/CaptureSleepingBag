@@ -70,9 +70,33 @@ public class MapCommand implements CommandExecutor {
 	
 	private Main main;
 	
+	// CONSTRUCTOR //
+	
 	public MapCommand(Main main) 
 	{
 		this.main = main;
+	}
+	
+	
+	// TOOLS //
+	
+	private double roundPointFive(double round) 
+	{
+		double output = Math.ceil(round) - 0.5;
+		return output;
+	}
+	
+	private Location pointFiveLoc(Location location) 
+	{
+		World world = location.getWorld();
+		
+		double roundedX = roundPointFive(location.getX());
+		double y = roundPointFive(location.getY());
+		double roundedZ = roundPointFive(location.getZ());
+		
+		Location retLoc = new Location(world, roundedX, y, roundedZ);
+		
+		return retLoc;
 	}
 	
 	private boolean testInt(String str) 
@@ -153,7 +177,7 @@ public class MapCommand implements CommandExecutor {
 									int team = Integer.parseInt(args[2]);
 									
 									// get location at players feet
-									Location loc = player.getLocation().add(0, -1, 0);
+									Location loc = pointFiveLoc(player.getLocation().add(0, -1, 0));
 									
 									map.setMapBag(team, loc);
 									
@@ -175,7 +199,7 @@ public class MapCommand implements CommandExecutor {
 									int team2 = Integer.parseInt(args[3]);
 									
 									// get location at players feet
-									Location loc = player.getLocation().add(0, -1, 0);
+									Location loc = pointFiveLoc(player.getLocation().add(0, -1, 0));
 									
 									map.setCaptured(team1, team2, loc);
 									
@@ -200,7 +224,7 @@ public class MapCommand implements CommandExecutor {
 									int team = Integer.parseInt(args[2]);
 									
 									// get location at players feet
-									Location loc = player.getLocation();
+									Location loc = pointFiveLoc(player.getLocation());
 									
 									map.setMapSpawn(team, loc);
 									
@@ -221,7 +245,7 @@ public class MapCommand implements CommandExecutor {
 									int tier = Integer.parseInt(args[2]);
 									
 									// get location at players feet
-									Location loc = player.getLocation().add(0, -1, 0);
+									Location loc = pointFiveLoc(player.getLocation().add(0, -1, 0));
 									
 									map.addGenerator(tier, loc);;
 									
@@ -241,7 +265,7 @@ public class MapCommand implements CommandExecutor {
 								{
 									int type = Integer.parseInt(args[2]);
 									
-									Location loc = player.getLocation();
+									Location loc = pointFiveLoc(player.getLocation());
 									
 									map.addGenerator(type, loc);
 									
@@ -267,7 +291,7 @@ public class MapCommand implements CommandExecutor {
 									int team = Integer.parseInt(args[2]);
 									
 									// get location at players feet
-									Location loc = player.getLocation().add(0, -1, 0);
+									Location loc = pointFiveLoc(player.getLocation().add(0, -1, 0));
 									
 									map.setMapR1(team, loc);
 									
@@ -288,7 +312,7 @@ public class MapCommand implements CommandExecutor {
 									int team = Integer.parseInt(args[2]);
 									
 									// get location at players feet
-									Location loc = player.getLocation().add(0, -1, 0);
+									Location loc = pointFiveLoc(player.getLocation().add(0, -1, 0));
 									
 									map.setMapR2(team, loc);
 									

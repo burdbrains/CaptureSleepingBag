@@ -151,6 +151,11 @@ public class Map {
 		return this.teamCount;
 	}
 	
+	public HashMap<TeamData, TeamMapData> getDataHash()
+	{
+		return this.teamsMapData;
+	}
+	
 	// get the TeamMapData
 	private TeamMapData getMapData(int teamVal) 
 	{
