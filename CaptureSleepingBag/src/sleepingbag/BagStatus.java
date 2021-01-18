@@ -6,7 +6,8 @@ public enum BagStatus {
 	
 	SAFE(ChatColor.GREEN + "Safe", true, false),
 	TAKEN(ChatColor.YELLOW + "Taken", true, true),
-	CAPTURED(ChatColor.RED + "Captured", false, true);
+	CAPTURED(ChatColor.RED + "Captured", false, true),
+	RETRIEVING(ChatColor.BLUE + "Retrieving", false, true);
 	
 	private String display;
 	private boolean respawn;

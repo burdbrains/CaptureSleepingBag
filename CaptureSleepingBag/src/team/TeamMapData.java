@@ -13,7 +13,7 @@ public class TeamMapData {
 	private Location region1;
 	private Location region2;
 	
-	private int otherTeams; // team count - 1
+	private int maxTeams; // team count - 1
 	
 	private HashMap<TeamData, Location> capturedLocations;
 	private Location spawnLocation;
@@ -29,7 +29,7 @@ public class TeamMapData {
 	public TeamMapData(TeamData data, int maxTeams) 
 	{
 		this.teamData = data;
-		this.otherTeams = maxTeams-1;
+		this.maxTeams = maxTeams;
 		
 		this.capturedLocations = new HashMap<>();
 		
@@ -50,12 +50,14 @@ public class TeamMapData {
 		
 		this.isFinished = true;
 		
+		retStr += "\n\n" + this.teamData.getChatColor() + ChatColor.BOLD.toString() + this.teamData.getTeamName() + ":" + "\n" + ChatColor.RESET;
+		
 		this.capturedLocations.forEach((
 				(key, value) 
 				-> {
 					if (value == null) 
 					{
-						retStr += ChatColor.GRAY + "Captured location for " + key.getChatColor() + key.getTeamName() + ChatColor.GRAY + "bag\n";
+						retStr += ChatColor.GRAY + "Captured location for " + key.getChatColor() + key.getTeamName() + ChatColor.GRAY + " bag" + "\n";
 						this.isFinished = false;
 					}	
 				}
@@ -63,22 +65,22 @@ public class TeamMapData {
 		
 		if (this.region1 == null) 
 		{
-			retStr += ChatColor.GRAY + "Region corner 1";
+			retStr += ChatColor.GRAY + "Region corner 1" + "\n";
 			this.isFinished = false;
 		}
 		if (this.region2 == null)
 		{
-			retStr += ChatColor.GRAY + "Region corner 2";
+			retStr += ChatColor.GRAY + "Region corner 2" + "\n";
 			this.isFinished = false;
 		}
 		if (this.spawnLocation == null) 
 		{
-			retStr += ChatColor.GRAY + "Spawn location";
+			retStr += ChatColor.GRAY + "Spawn location" + "\n";
 			this.isFinished = false;
 		}
 		if (this.bagLocation == null) 
 		{
-			retStr += ChatColor.GRAY + "Bag location";
+			retStr += ChatColor.GRAY + "Bag location" + "\n";
 			this.isFinished = false;
 		}
 		
@@ -145,10 +147,13 @@ public class TeamMapData {
 	// in setCaptured() function
 	public void initializeHash() 
 	{
-		for (int i = 1; i <= this.otherTeams; i++) 
+		for (int i = 1; i <= this.maxTeams; i++) 
 		{
-			TeamData tData = TeamData.valueOf(i);
-			this.capturedLocations.put(tData, null);
+			if (!TeamData.valueOf(i).equals(this.teamData)) 
+			{
+				TeamData tData = TeamData.valueOf(i);
+				this.capturedLocations.put(tData, null);
+			}
 		}
 	}
 	

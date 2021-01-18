@@ -69,6 +69,9 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() 
 	{
+		this.getConfig().options().copyDefaults();
+		this.saveDefaultConfig();
+		
 		this.getCommand("sbm").setExecutor(new MapCommand(this));
 		
 		// placeholder

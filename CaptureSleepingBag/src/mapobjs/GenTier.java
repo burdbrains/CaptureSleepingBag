@@ -10,6 +10,10 @@ import org.bukkit.ChatColor;
 
 public enum GenTier {
 	
+	 // ADD A WRITE FROM CONFIG SECTION //
+	// PROBABLY BEST TO DO THIS LATER  //
+	
+	
 	One(Material.IRON_INGOT, ChatColor.WHITE + "IRON", 1),
 	Two(Material.GOLD_INGOT, ChatColor.GOLD + "GOLD", 2),
 	Three(Material.NETHERITE_INGOT, ChatColor.DARK_GRAY + "NETHERITE", 3);
@@ -25,6 +29,8 @@ public enum GenTier {
 	{
 		this.tierMat = material;
 		this.tierName = name;
+		
+		this.value = value;
 	}
 	
 	static 

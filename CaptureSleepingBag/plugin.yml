@@ -1,6 +1,10 @@
-version: 0.1.0
+version: 0.0.8
 api-version: 1.16
 name: CaptureSleepingBag
 main: com.burdbrains.capturesleepingbag.Main
 author: burdbrains
 description: Capture the Flag X Bed Wars mini-game.
+commands:
+  sbm:
+    aliases: []
+    description: Command for creating and setting values for a CTSB map.

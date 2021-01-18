@@ -53,6 +53,8 @@ public class Map {
 		this.mapName = name;
 		
 		this.teamsMapData = new HashMap<>();
+		this.generators = new ArrayList<>();
+		this.shopkeepers = new ArrayList<>();
 		
 		this.isFinished = false;
 		
@@ -149,6 +151,16 @@ public class Map {
 	public int getMaxTeams() 
 	{
 		return this.teamCount;
+	}
+	
+	public ArrayList<Generator> getGenerators()
+	{
+		return this.generators;
+	}
+	
+	public ArrayList<Shopkeeper> getShopkeepers()
+	{
+		return this.shopkeepers;
 	}
 	
 	public HashMap<TeamData, TeamMapData> getDataHash()

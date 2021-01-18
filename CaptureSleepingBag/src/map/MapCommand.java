@@ -80,6 +80,15 @@ public class MapCommand implements CommandExecutor {
 	
 	// TOOLS //
 	
+	private String locToStr(Location loc) 
+	{
+		String retStr = "";
+		
+		retStr += loc.getX() + ", " + loc.getY() + ", " + loc.getZ();
+		
+		return retStr;
+	}
+	
 	private double roundPointFive(double round) 
 	{
 		double output = Math.ceil(round) - 0.5;
@@ -91,7 +100,7 @@ public class MapCommand implements CommandExecutor {
 		World world = location.getWorld();
 		
 		double roundedX = roundPointFive(location.getX());
-		double y = roundPointFive(location.getY());
+		double y = location.getY();
 		double roundedZ = roundPointFive(location.getZ());
 		
 		Location retLoc = new Location(world, roundedX, y, roundedZ);
@@ -127,7 +136,7 @@ public class MapCommand implements CommandExecutor {
 		
 		
 		// Make sure the command executor is a player
-		if (sender instanceof Player && args.length > 1) 
+		if (sender instanceof Player && args.length >= 1) 
 		{
 			// cast the player
 			Player player = (Player) sender;
@@ -144,6 +153,10 @@ public class MapCommand implements CommandExecutor {
 					{
 						// uses map writer to add newly established map (with command)
 						// to creatingMap HashMap
+						
+						// ADD SOME CHECK TO SEE IF THE .YML FILE
+						// ALREADY EXISTS AND SEND AN ERROR MESSAGE
+						// IF THE .YML FILE DOES ALREADY EXIST
 						MapWriter.createMap(this.main, args, player, world);
 					}
 					else 
@@ -251,7 +264,10 @@ public class MapCommand implements CommandExecutor {
 									
 									GenTier gTier = GenTier.valueOf(tier);
 									
-									player.sendMessage(ChatColor.GRAY + "Generator of tier " + gTier.getName() + ChatColor.GRAY + "sucessfully set");
+									// for some reason gTier.getName() is null
+									// because I never set the value parameter
+									// in GenTier Enum CCx
+									player.sendMessage(ChatColor.GRAY + "Generator of tier " + gTier.getName() + ChatColor.GRAY + " sucessfully set @ " + locToStr(loc));
 								}
 								else 
 								{
