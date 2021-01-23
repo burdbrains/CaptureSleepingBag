@@ -1,4 +1,4 @@
-version: 0.0.8
+version: 0.0.9
 api-version: 1.16
 name: CaptureSleepingBag
 main: com.burdbrains.capturesleepingbag.Main

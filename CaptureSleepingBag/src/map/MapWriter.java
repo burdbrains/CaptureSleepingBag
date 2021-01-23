@@ -202,10 +202,10 @@ public class MapWriter {
 			
 			HashMap<Integer, double[]> genHash = new HashMap<>();
 			
+			int count = 1;
+			
 			for (Generator gen : generators) 
-			{
-				int count = 1;
-				
+			{	
 				if (gen.getGenTier().getValue() == i) 
 				{
 					genHash.put(count, formatLocation(gen.getGenLoc()));
