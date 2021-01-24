@@ -4,10 +4,10 @@ import org.bukkit.ChatColor;
 
 public enum BagStatus {
 	
-	SAFE(ChatColor.GREEN + "Safe", true, false),
-	TAKEN(ChatColor.YELLOW + "Taken", true, true),
-	CAPTURED(ChatColor.RED + "Captured", false, true),
-	RETRIEVING(ChatColor.BLUE + "Retrieving", false, true);
+	Safe(ChatColor.GREEN + "Safe", true, false),
+	Taken(ChatColor.YELLOW + "Taken", true, true),
+	Captured(ChatColor.RED + "Captured", false, true),
+	Retrieving(ChatColor.BLUE + "Retrieving", false, true);
 	
 	private String display;
 	private boolean respawn;

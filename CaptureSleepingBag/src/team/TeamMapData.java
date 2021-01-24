@@ -13,7 +13,7 @@ public class TeamMapData {
 	private Location region1;
 	private Location region2;
 	
-	private int maxTeams; // team count - 1
+	private int maxTeams; // team count - 1 (not true anymore has to include self in team count for 
 	
 	private HashMap<TeamData, Location> capturedLocations;
 	private Location spawnLocation;
@@ -168,7 +168,7 @@ public class TeamMapData {
 		}
 		else 
 		{
-			System.out.println("Captured team location doesn't exist.");
+			System.out.println("Captured team location doesn't exist or is the team it's being set for.");
 		}
 	}
 	

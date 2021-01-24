@@ -1,5 +1,7 @@
 package sleepingbag;
 
+import org.bukkit.Location;
+
 public class Bag {
 	
 	//////////////////////////////////////////
@@ -12,5 +14,7 @@ public class Bag {
 	private BagStatus bagStatus;
 	
 	private BagData bagData;
+	
+	private Location lastLocation;
 
 }

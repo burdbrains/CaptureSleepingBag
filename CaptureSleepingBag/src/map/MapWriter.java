@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import com.burdbrains.capturesleepingbag.Main;
 
 import mapobjs.Generator;
+import mapobjs.ShopType;
 import mapobjs.Shopkeeper;
 import net.md_5.bungee.api.ChatColor;
 import team.TeamData;
@@ -80,7 +81,7 @@ public class MapWriter {
 	// and "yml" parameters to the existing yml file
 	//
 	// can be used for editing function as well as finalizing
-	private static boolean initiateFile(File file, YamlConfiguration yml, Player player)// throws IOException
+	private static boolean initiateFile(File file, YamlConfiguration yml, Player player) // throws IOException
 	{
 		String worldStr = player.getWorld().getName();
 		try 
@@ -107,7 +108,7 @@ public class MapWriter {
 			
 			return false;
 		}
-	}
+	} // ^^^ THIS FUNCTION IS UNUSED ^^^ //
 	
 	
 	// THIS SHOULD BE A WORK AROUND FOR THE STRANGE CASE THAT THE ABOVE FUNCTION CREATES //
@@ -149,7 +150,7 @@ public class MapWriter {
 		
 		ArrayList<Shopkeeper> shopkeepers = map.getShopkeepers();
 		
-		HashMap<TeamData, TeamMapData> mapData = map.getDataHash();
+		ArrayList<TeamMapData> mapData = map.getDataHash();
 		
 		try 
 		{
@@ -161,7 +162,10 @@ public class MapWriter {
 				// actual writing to the .yml section
 				YamlConfiguration modifyYmlFile = YamlConfiguration.loadConfiguration(ymlFile);
 				
+				modifyYmlFile.set("Name", mapName);
+				
 				writeGenerators(generators, modifyYmlFile);
+				writeShopkeepers(shopkeepers, modifyYmlFile);
 				
 				modifyYmlFile.save(ymlFile);
 			}
@@ -221,6 +225,39 @@ public class MapWriter {
 		yml.set("Generators", accumulativeHash);
 	}
 	
+	private static void writeShopkeepers(ArrayList<Shopkeeper> shopkeepers, YamlConfiguration yml) 
+	{
+		HashMap<String, HashMap<Integer, double[]>> accumulativeHash = new HashMap<>();
+		
+		// differentiate between item
+		// and team shops
+		for (int i = 0; i <= 1; i++) 
+		{
+			HashMap<Integer, double[]> shopHash = new HashMap<>();
+			
+			int count = 1;
+			
+			for (Shopkeeper shop : shopkeepers) 
+			{	
+				if (shop.getShopType().getValue() == i) 
+				{
+					shopHash.put(count, formatLocation(shop.getShopLoc()));
+					count++;
+				}
+			}
+			
+			String configType = ShopType.valueOf(i).getDisplay().toUpperCase();
+			
+			accumulativeHash.put(configType, shopHash);
+		}
+		
+		yml.set("Shopkeepers", accumulativeHash);
+	}
+	
+	private static void writeTeams(HashMap<TeamData, TeamMapData> teamDatas, YamlConfiguration yml) 
+	{
+		// TO-DO
+	}
 	
 	// formatLocation (Take Location Object and convert to list of 3 coordinates)
 	private static double[] formatLocation(Location location) 

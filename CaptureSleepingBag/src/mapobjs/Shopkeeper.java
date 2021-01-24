@@ -6,20 +6,20 @@ public class Shopkeeper {
 	
 	private Location shopLocation;
 	
-	// 0 is team shop
-	// 1 is item shop
-	private int itemShop;
+	// 1 is team shop
+	// 0 is item shop
+	private ShopType shopType;
 	
 	public Shopkeeper() 
 	{
 		this.shopLocation = null;
-		this.itemShop = 0;
+		this.shopType = ShopType.Item;
 	}
 	
-	public Shopkeeper(Location loc, int itemShop) 
+	public Shopkeeper(Location loc, int shopType) 
 	{
 		this.shopLocation = loc;
-		this.itemShop = itemShop;
+		this.shopType = ShopType.valueOf(shopType);
 	}
 	
 	
@@ -29,9 +29,9 @@ public class Shopkeeper {
 		this.shopLocation = loc;
 	}
 	
-	public void setItemShop(int itemShop) 
+	public void setShopType(int itemShop) 
 	{
-		this.itemShop = itemShop;
+		this.shopType = ShopType.valueOf(itemShop);
 	}
 	
 	// GETTERS //
@@ -40,9 +40,9 @@ public class Shopkeeper {
 		return this.shopLocation;
 	}
 	
-	public int isItemShop() 
+	public ShopType getShopType() 
 	{
-		return this.itemShop;
+		return this.shopType;
 	}
 
 }

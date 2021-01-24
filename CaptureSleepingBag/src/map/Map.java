@@ -25,6 +25,12 @@ public class Map {
 	// will also use this for writing to a map with MapWriter			 //
 	///////////////////////////////////////////////////////////////////////
 	
+	public final int MAX_TEAMS = 8;
+	
+	public final int MIN_TEAMS = 2;
+	
+	
+	
 	// private boolean writingMap;
 	
 	private Main main;
@@ -34,7 +40,11 @@ public class Map {
 	private World mapWorld;
 	
 	private int teamCount;
-	private HashMap<TeamData, TeamMapData> teamsMapData;
+	
+	private ArrayList<TeamData> allTeams;
+	
+	private ArrayList<TeamMapData> teamsMapData;
+	// private HashMap<TeamData, TeamMapData> teamsMapData;
 	
 	private ArrayList<Generator> generators;
 	
@@ -48,16 +58,18 @@ public class Map {
 		
 		this.mapWorld = world;
 		
-		this.teamCount = maxTeams;
+		this.setTeamCount(maxTeams);
 		
 		this.mapName = name;
 		
-		this.teamsMapData = new HashMap<>();
+		this.allTeams = new ArrayList<>();
+		this.teamsMapData = new ArrayList<>();
 		this.generators = new ArrayList<>();
 		this.shopkeepers = new ArrayList<>();
 		
 		this.isFinished = false;
 		
+		this.establishAllTeams();
 		this.establishMapData();
 	}
 	
@@ -83,7 +95,7 @@ public class Map {
 	// the maps HashMap of teams
 	
 	
-	public static volatile String errorStr = "";
+	//public static volatile String errorStr = "";
 	// check if all the values in this instance (specifically TeamMapData) are filled in
 	// if not add to the return String the things that are
 	// not finished
@@ -91,18 +103,17 @@ public class Map {
 	{
 		this.isFinished = true;
 		
-		errorStr = "";
-		this.teamsMapData.forEach((
-				(key, value)
-				-> 
-				{
-					if (!value.getIsFinished()) 
-					{
-						errorStr += value.checkFinished();
-						this.isFinished = false;
-					}
-				}
-				));
+		String errorStr = "";
+		
+		for (TeamMapData tmData : this.teamsMapData) 
+		{
+			errorStr += tmData.checkFinished();
+			
+			if (!tmData.getIsFinished()) 
+			{
+				this.isFinished = false;
+			}
+		}
 		
 		return errorStr;
 	}
@@ -110,7 +121,7 @@ public class Map {
 	public boolean validTeam(int teamVal) 
 	{
 		TeamData tData = TeamData.valueOf(teamVal);
-		if (this.teamsMapData.containsKey(tData)) 
+		if (this.allTeams.contains(tData)) 
 		{
 			return true;
 		}
@@ -118,15 +129,25 @@ public class Map {
 		return false;
 	}
 	
-	// set TeamData values in teamsMapData hashmap
-	// for later use in object
-	private void establishMapData()
+	
+	private void establishAllTeams() 
 	{
 		for (int i = 1; i <= this.teamCount; i++) 
 		{
 			TeamData tData = TeamData.valueOf(i);
+			this.allTeams.add(tData);
+		}
+	}
+	
+	
+	// set TeamData values in teamsMapData hashmap
+	// for later use in object
+	private void establishMapData()
+	{
+		for (TeamData tData : this.allTeams) 
+		{
 			TeamMapData tmData = new TeamMapData(tData, this.teamCount);
-			this.teamsMapData.put(tData, tmData);
+			this.teamsMapData.add(tmData);
 		}
 	}
 	
@@ -163,7 +184,7 @@ public class Map {
 		return this.shopkeepers;
 	}
 	
-	public HashMap<TeamData, TeamMapData> getDataHash()
+	public ArrayList<TeamMapData> getDataHash()
 	{
 		return this.teamsMapData;
 	}
@@ -173,10 +194,14 @@ public class Map {
 	{
 		if (this.validTeam(teamVal)) 
 		{
-			TeamMapData tmData = this.teamsMapData.get(TeamData.valueOf(teamVal));
-			if (tmData != null) 
+			TeamData tData = TeamData.valueOf(teamVal);
+			
+			for (TeamMapData tmData : this.teamsMapData) 
 			{
-				return tmData;
+				if (tmData.getTeamData().equals(tData)) 
+				{
+					return tmData;
+				}
 			}
 		}
 		
@@ -185,6 +210,22 @@ public class Map {
 	
 	
 	// SETTERS //
+	public void setTeamCount(int tCount) 
+	{
+		if (tCount > MAX_TEAMS) 
+		{
+			this.teamCount = MAX_TEAMS;
+		}
+		else if (tCount < MIN_TEAMS) 
+		{
+			this.teamCount = MIN_TEAMS;
+		}
+		else 
+		{
+			this.teamCount = tCount;
+		}
+	}
+	
 	public void setMapBag(int teamVal, Location bagLoc) 
 	{
 		TeamMapData tmData = this.getMapData(teamVal);
